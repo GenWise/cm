@@ -7,7 +7,18 @@ A unified content library for GenWise marketing collateral - videos, clips, asse
 - **Frontend**: React + Vite + TypeScript + Tailwind + shadcn/ui
 - **Database**: Supabase (PostgreSQL)
 - **Search**: PostgreSQL full-text search (tsvector)
-- **Hosting**: Vercel or GitHub Pages
+- **Hosting**: Cloudflare Pages (MANUAL deploy)
+
+## Production
+- **URL**: https://cm.genwise.in
+- **Cloudflare Pages Project**: `cm` (cm-69m.pages.dev)
+- **Deploy**: Manual via wrangler (NOT auto-deploy from GitHub)
+
+```bash
+# Deploy to production
+npm run build
+CLOUDFLARE_API_TOKEN="..." npx wrangler pages deploy dist --project-name=cm --branch=main
+```
 
 ## Key Entities
 - **Programs**: M3, GSP, TNP365, GenAI
@@ -37,6 +48,17 @@ https://supabase.com/dashboard/project/kkkcjcqvngyohzhqoanb
 npm install
 npm run dev          # Start Vite dev server
 ```
+
+## Gotchas & Fixes
+
+### UUID Generation (Fixed Feb 2026)
+- **Problem**: Frontend was generating IDs like `video_${Date.now()}` but Supabase expects UUIDs
+- **Fix**: Let Supabase auto-generate UUIDs - removed `id` from create payloads
+- **Files**: `src/app/pages/AddVideo.tsx`, `src/app/lib/api.ts`
+
+### Canva MCP Brand Kit Limitation
+- Canva MCP `generate-design` doesn't apply brand kit even when `brand_kit_id` is passed
+- **Workaround**: Generate collateral programmatically with HTML + Playwright, or create manually in Canva
 
 ## MVP Scope (Phase 1)
 1. Programs CRUD
