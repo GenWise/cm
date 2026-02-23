@@ -87,7 +87,7 @@ export const videosApi = {
     return aggregateVideoTags(data, data.clips);
   },
 
-  create: async (video: Omit<Video, 'created_at' | 'updated_at'>) => {
+  create: async (video: Omit<Video, 'id' | 'created_at' | 'updated_at'>) => {
     const { data, error } = await supabase
       .from('videos')
       .insert(video)
@@ -168,7 +168,7 @@ export const clipsApi = {
     return data as Clip;
   },
 
-  createMany: async (clips: Omit<Clip, 'created_at'>[]) => {
+  createMany: async (clips: Omit<Clip, 'id' | 'created_at'>[]) => {
     const { data, error } = await supabase
       .from('clips')
       .insert(clips)

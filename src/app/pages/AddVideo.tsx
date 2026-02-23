@@ -52,16 +52,14 @@ export function AddVideo() {
 
   const createVideoMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      const videoId = `video_${Date.now()}`;
-      const video = await videosApi.create({
-        id: videoId,
-        ...data,
-      });
-      
+      // Let Supabase generate the UUID
+      const video = await videosApi.create(data);
+      const videoId = video.id;
+
       // Create clips if any
       if (parsedClips.length > 0) {
         const clipsToCreate = parsedClips.map((clip) => ({
-          id: `clip_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          // Let Supabase generate clip UUIDs too
           video_id: videoId,
           start_time: clip.start_time,
           end_time: clip.end_time,
