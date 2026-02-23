@@ -88,6 +88,7 @@ Root: https://drive.google.com/drive/folders/1A6wi4Tx_PSsaoHqjKRGw2NZbiSbhFfWR
 | customers/m3/inventure-academy | 1iGcC7-QXMv5luWFo8xBNRkxEVJunJqen |
 | customers/m3/sanskriti-the-gurukul | 1dBTImJYo4PmPyq2UNZOWWxMTTT-Xt8Hg |
 | customers/m3/doon-girls-school | 1rBMvBjvjP9Tdezl7MBh7upOqfvAiBpC8 |
+| customers/m3/marketing-collateral | 1bLIWRcreFPwm8YebLAZ_Vd-3A7tM5hVC |
 | customers/genai | 1nV6ZPxq9MGH-f4x-ApigbCQl7iAG5uhr |
 | customers/genai/kc-high | 1z_y_vBfbQPgKRdijtJvMEjkDb3-pfRLH |
 | customers/genai/fountainhead | 1pfg99ezd3mMnJdQAK7M9J_aLfsgxufSt |
