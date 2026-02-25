@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { Program, Video, Clip, ContentPost, VideoWithTags } from './types';
+import type { Program, Video, Clip, ContentPost, VideoWithTags, RawSource, RawSourceType, RawSourceStatus } from './types';
 import { aggregateVideoTags } from './tagUtils';
 
 // Programs
@@ -305,5 +305,78 @@ export const statsApi = {
       posts: posts.count || 0,
       ideas: ideas.count || 0,
     };
+  },
+};
+
+// Raw Sources
+export const rawSourcesApi = {
+  getAll: async (filters?: { program_id?: string; status?: RawSourceStatus; source_type?: RawSourceType }) => {
+    let query = supabase
+      .from('raw_sources')
+      .select('*, program:programs(*)')
+      .order('created_at', { ascending: false });
+
+    if (filters?.program_id) {
+      query = query.eq('program_id', filters.program_id);
+    }
+    if (filters?.status) {
+      query = query.eq('status', filters.status);
+    }
+    if (filters?.source_type) {
+      query = query.eq('source_type', filters.source_type);
+    }
+
+    const { data, error } = await query;
+    if (error) throw error;
+    return data;
+  },
+
+  getById: async (id: string) => {
+    const { data, error } = await supabase
+      .from('raw_sources')
+      .select('*, program:programs(*)')
+      .eq('id', id)
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  create: async (source: Omit<RawSource, 'id' | 'created_at' | 'updated_at'>) => {
+    const { data, error } = await supabase
+      .from('raw_sources')
+      .insert(source)
+      .select()
+      .single();
+    if (error) throw error;
+    return data as RawSource;
+  },
+
+  update: async (id: string, updates: Partial<RawSource>) => {
+    const { data, error } = await supabase
+      .from('raw_sources')
+      .update({ ...updates, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data as RawSource;
+  },
+
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('raw_sources')
+      .delete()
+      .eq('id', id);
+    if (error) throw error;
+  },
+
+  search: async (searchTerm: string) => {
+    const { data, error } = await supabase
+      .from('raw_sources')
+      .select('*, program:programs(*)')
+      .or(`title.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,collected_by.ilike.%${searchTerm}%`)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data;
   },
 };

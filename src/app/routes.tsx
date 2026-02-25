@@ -7,6 +7,7 @@ import { VideoDetail } from './pages/VideoDetail';
 import { Clips } from './pages/Clips';
 import { Posts } from './pages/Posts';
 import { Ideas } from './pages/Ideas';
+import { RawSources } from './pages/RawSources';
 import { Settings } from './pages/Settings';
 
 export const router = createBrowserRouter([
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: 'posts/new', element: <Posts /> },
       { path: 'ideas', element: <Ideas /> },
       { path: 'ideas/new', element: <Ideas /> },
+      { path: 'sources', element: <RawSources /> },
       { path: 'settings', element: <Settings /> },
     ],
   },

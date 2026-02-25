@@ -1,13 +1,14 @@
 import { useLocation } from 'react-router';
 import { Link } from '@/components/ui/link';
 import { cn } from '@/components/ui/utils';
-import { 
-  LayoutDashboard, 
-  Video, 
-  Scissors, 
-  Calendar, 
-  Lightbulb, 
-  Settings 
+import {
+  LayoutDashboard,
+  Video,
+  Scissors,
+  Calendar,
+  Lightbulb,
+  Database,
+  Settings
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -17,6 +18,7 @@ interface SidebarProps {
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+  { name: 'Sources', href: '/sources', icon: Database },
   { name: 'Videos', href: '/videos', icon: Video },
   { name: 'Clips', href: '/clips', icon: Scissors },
   { name: 'Posts', href: '/posts', icon: Calendar },

@@ -112,3 +112,45 @@ export interface PostWithRelations extends ContentPost {
   video?: Video;
   clip?: Clip;
 }
+
+// Raw Sources - tracking content origins
+export type RawSourceType =
+  | 'feedback_sheet'
+  | 'video_recording'
+  | 'session_recording'
+  | 'whatsapp_message'
+  | 'email_thread'
+  | 'survey_response'
+  | 'social_media'
+  | 'other';
+
+export type RawSourceStatus = 'raw' | 'reviewing' | 'curated' | 'published' | 'archived';
+
+export interface RawSource {
+  id: string;
+  program_id?: string;
+  source_type: RawSourceType;
+  title: string;
+  description?: string;
+  source_url?: string;
+  source_id?: string;
+  date_collected?: string;
+  collected_by?: string;
+  status: RawSourceStatus;
+  testimonial_count: number;
+  best_quotes: Array<{
+    quote: string;
+    author?: string;
+    school?: string;
+    track?: string;
+    rating?: number;
+  }>;
+  notes?: string;
+  tags: string[];
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface RawSourceWithProgram extends RawSource {
+  program?: Program;
+}
