@@ -3,8 +3,14 @@
 ## Active Tasks
 - [ ] Add M3 WA Status Flyer video to CM database
 - [ ] Set up auto-deploy from GitHub to Cloudflare Pages (currently manual)
+- [ ] Build Raw Sources UI in CM app (list/add/edit)
+- [ ] Add OOB school logo to Drive (missing from collection)
 
 ## Completed
+- [x] Add raw_sources table migration - Feb 2026
+- [x] Add M3 feedback sheet as first raw_source entry
+- [x] Curate 12 best M3 testimonials (assets/M3_BEST_TESTIMONIALS_FEB2026.md)
+- [x] Create Figma testimonial card prompt (assets/FIGMA_TESTIMONIAL_CARD_PROMPT.md)
 - [x] Fix UUID generation bug (video/clip IDs) - Feb 2026
 - [x] Organize Google Drive customer folders by program (m3/genai/gsp)
 - [x] Create school subfolders with standardized logos
