@@ -15,9 +15,9 @@ A unified content library for GenWise marketing collateral - videos, clips, asse
 - **Deploy**: Manual via wrangler (NOT auto-deploy from GitHub)
 
 ```bash
-# Deploy to production
+# Deploy to production (branch MUST be master, not main!)
 npm run build
-CLOUDFLARE_API_TOKEN="..." npx wrangler pages deploy dist --project-name=cm --branch=main
+export $(grep CLOUDFLARE_API_TOKEN ~/.env) && npx wrangler pages deploy dist --project-name=cm --branch=master --commit-dirty=true
 ```
 
 ## Key Entities
