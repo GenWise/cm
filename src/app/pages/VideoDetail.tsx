@@ -17,12 +17,12 @@ import { videosApi } from '@/lib/api';
 import { getDrivePreviewUrl, isGoogleDriveUrl } from '@/lib/googleDrive';
 import { format } from 'date-fns';
 
-export type VideoStage = 'raw' | 'edited' | 'final';
+export type VideoStage = 'raw' | 'portrait' | 'landscape';
 
 export function VideoDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [activeStage, setActiveStage] = useState<VideoStage>('final');
+  const [activeStage, setActiveStage] = useState<VideoStage>('landscape');
 
   const { data: video, isLoading } = useQuery({
     queryKey: ['video', id],
@@ -118,12 +118,12 @@ export function VideoDetail() {
             <div className="aspect-video bg-gray-900 flex items-center justify-center text-white">
               {(() => {
                 // Get the URL for the active stage
-                const stageUrl = activeStage === 'final' ? video.final_video_url
-                  : activeStage === 'edited' ? video.edited_video_url
+                const stageUrl = activeStage === 'landscape' ? video.landscape_video_url
+                  : activeStage === 'portrait' ? video.portrait_video_url
                   : video.raw_video_url;
 
-                // For final stage, prefer YouTube embed if available
-                if (activeStage === 'final' && video.youtube_url) {
+                // For landscape stage, prefer YouTube embed if available
+                if (activeStage === 'landscape' && video.youtube_url) {
                   return (
                     <iframe
                       src={`https://www.youtube.com/embed/${video.youtube_id || video.youtube_url.split('v=')[1]?.split('&')[0]}`}

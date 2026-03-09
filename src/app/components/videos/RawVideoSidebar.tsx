@@ -28,28 +28,28 @@ export function RawVideoSidebar({ video, activeStage, onStageChange }: RawVideoS
 
   // Determine video editing status
   const hasRaw = !!video.raw_video_url;
-  const hasEdited = !!video.edited_video_url;
-  const hasFinal = !!video.final_video_url;
+  const hasPortrait = !!video.portrait_video_url;
+  const hasLandscape = !!video.landscape_video_url;
 
-  const getStatusIcon = (step: 'raw' | 'edited' | 'final') => {
+  const getStatusIcon = (step: 'raw' | 'portrait' | 'landscape') => {
     switch (step) {
       case 'raw':
         return hasRaw ? <CheckCircle className="w-4 h-4 text-green-600" /> : <AlertCircle className="w-4 h-4 text-gray-400" />;
-      case 'edited':
-        return hasEdited ? <CheckCircle className="w-4 h-4 text-green-600" /> : <Clock className="w-4 h-4 text-gray-400" />;
-      case 'final':
-        return hasFinal ? <CheckCircle className="w-4 h-4 text-green-600" /> : <Clock className="w-4 h-4 text-gray-400" />;
+      case 'portrait':
+        return hasPortrait ? <CheckCircle className="w-4 h-4 text-green-600" /> : <Clock className="w-4 h-4 text-gray-400" />;
+      case 'landscape':
+        return hasLandscape ? <CheckCircle className="w-4 h-4 text-green-600" /> : <Clock className="w-4 h-4 text-gray-400" />;
     }
   };
 
-  const getStatusText = (step: 'raw' | 'edited' | 'final') => {
+  const getStatusText = (step: 'raw' | 'portrait' | 'landscape') => {
     switch (step) {
       case 'raw':
         return hasRaw ? 'Available' : 'Not uploaded';
-      case 'edited':
-        return hasEdited ? 'Available' : 'In progress';
-      case 'final':
-        return hasFinal ? 'Published' : 'Pending';
+      case 'portrait':
+        return hasPortrait ? 'Available' : 'Pending';
+      case 'landscape':
+        return hasLandscape ? 'Available' : 'Pending';
     }
   };
 
@@ -86,55 +86,55 @@ export function RawVideoSidebar({ video, activeStage, onStageChange }: RawVideoS
             </div>
           </button>
 
-          {/* Edited Video */}
+          {/* Portrait Video */}
           <button
-            onClick={() => setActiveTab('edited')}
+            onClick={() => setActiveTab('portrait')}
             className={`w-full flex items-center justify-between p-3 rounded-lg border-2 transition-all ${
-              activeTab === 'edited' 
-                ? 'border-purple-500 bg-purple-50' 
+              activeTab === 'portrait'
+                ? 'border-purple-500 bg-purple-50'
                 : 'border-gray-200 hover:border-gray-300'
             }`}
           >
             <div className="flex items-center gap-3">
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                hasEdited ? 'bg-purple-100' : 'bg-gray-100'
+                hasPortrait ? 'bg-purple-100' : 'bg-gray-100'
               }`}>
-                <Scissors className={`w-4 h-4 ${hasEdited ? 'text-purple-600' : 'text-gray-400'}`} />
+                <Scissors className={`w-4 h-4 ${hasPortrait ? 'text-purple-600' : 'text-gray-400'}`} />
               </div>
               <div className="text-left">
-                <p className="text-sm font-medium">Edited Video</p>
-                <p className="text-xs text-gray-500">{getStatusText('edited')}</p>
+                <p className="text-sm font-medium">Portrait (9:16)</p>
+                <p className="text-xs text-gray-500">{getStatusText('portrait')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {getStatusIcon('edited')}
-              <ChevronRight className={`w-4 h-4 ${activeTab === 'edited' ? 'text-purple-600' : 'text-gray-400'}`} />
+              {getStatusIcon('portrait')}
+              <ChevronRight className={`w-4 h-4 ${activeTab === 'portrait' ? 'text-purple-600' : 'text-gray-400'}`} />
             </div>
           </button>
 
-          {/* Final Video */}
+          {/* Landscape Video */}
           <button
-            onClick={() => setActiveTab('final')}
+            onClick={() => setActiveTab('landscape')}
             className={`w-full flex items-center justify-between p-3 rounded-lg border-2 transition-all ${
-              activeTab === 'final' 
-                ? 'border-green-500 bg-green-50' 
+              activeTab === 'landscape'
+                ? 'border-green-500 bg-green-50'
                 : 'border-gray-200 hover:border-gray-300'
             }`}
           >
             <div className="flex items-center gap-3">
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                hasFinal ? 'bg-green-100' : 'bg-gray-100'
+                hasLandscape ? 'bg-green-100' : 'bg-gray-100'
               }`}>
-                <Video className={`w-4 h-4 ${hasFinal ? 'text-green-600' : 'text-gray-400'}`} />
+                <Video className={`w-4 h-4 ${hasLandscape ? 'text-green-600' : 'text-gray-400'}`} />
               </div>
               <div className="text-left">
-                <p className="text-sm font-medium">Final Video</p>
-                <p className="text-xs text-gray-500">{getStatusText('final')}</p>
+                <p className="text-sm font-medium">Landscape (16:9)</p>
+                <p className="text-xs text-gray-500">{getStatusText('landscape')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {getStatusIcon('final')}
-              <ChevronRight className={`w-4 h-4 ${activeTab === 'final' ? 'text-green-600' : 'text-gray-400'}`} />
+              {getStatusIcon('landscape')}
+              <ChevronRight className={`w-4 h-4 ${activeTab === 'landscape' ? 'text-green-600' : 'text-gray-400'}`} />
             </div>
           </button>
         </div>
@@ -203,14 +203,14 @@ export function RawVideoSidebar({ video, activeStage, onStageChange }: RawVideoS
           </div>
         )}
 
-        {activeTab === 'edited' && (
+        {activeTab === 'portrait' && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="font-semibold text-sm flex items-center gap-2">
                 <Scissors className="w-4 h-4 text-purple-600" />
-                Edited Video
+                Portrait Video (9:16)
               </h4>
-              {hasEdited && isGoogleDriveUrl(video.edited_video_url!) && (
+              {hasPortrait && isGoogleDriveUrl(video.portrait_video_url!) && (
                 <Badge variant="outline" className="text-xs gap-1">
                   <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8.5 2.5l-6 10.5h4.5l6-10.5h-4.5zm7.5 0l6 10.5h-4.5l-6-10.5h4.5zm-11 12l3 5.5 6-10.5h-4.5l-4.5 7.5zm16 0h-9l-3 5.5h9l3-5.5z"/>
@@ -220,15 +220,14 @@ export function RawVideoSidebar({ video, activeStage, onStageChange }: RawVideoS
               )}
             </div>
 
-            {hasEdited ? (
+            {hasPortrait ? (
               <>
                 <div className="text-xs text-gray-600">
-                  <p className="mb-1">Working version with edits applied. May still need review or final touches.</p>
+                  <p className="mb-1">Vertical format for WhatsApp, Reels, and Shorts.</p>
                 </div>
-
                 <div className="space-y-2">
                   <GoogleDriveButton
-                    fileIdOrUrl={video.edited_video_url}
+                    fileIdOrUrl={video.portrait_video_url}
                     variant="default"
                     size="sm"
                     className="w-full"
@@ -236,52 +235,47 @@ export function RawVideoSidebar({ video, activeStage, onStageChange }: RawVideoS
                     Open in Google Drive
                   </GoogleDriveButton>
                 </div>
-
                 <div className="pt-3 border-t space-y-2">
-                  <p className="text-xs font-medium text-gray-700">Typical uses:</p>
+                  <p className="text-xs font-medium text-gray-700">Platforms:</p>
                   <ul className="text-xs text-gray-600 space-y-1 ml-3">
-                    <li>• Team review</li>
-                    <li>• Final adjustments</li>
-                    <li>• Pre-publication check</li>
+                    <li>• WhatsApp</li>
+                    <li>• Instagram Reels</li>
+                    <li>• YouTube Shorts</li>
                   </ul>
                 </div>
               </>
             ) : (
               <div className="text-center py-6 text-gray-400">
                 <Scissors className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                <p className="text-xs mb-3">Editing in progress</p>
-                <Button size="sm" variant="outline">
-                  Upload Edited Version
-                </Button>
+                <p className="text-xs mb-3">Portrait version not yet generated</p>
               </div>
             )}
           </div>
         )}
 
-        {activeTab === 'final' && (
+        {activeTab === 'landscape' && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="font-semibold text-sm flex items-center gap-2">
                 <Video className="w-4 h-4 text-green-600" />
-                Final Video
+                Landscape Video (16:9)
               </h4>
-              {hasFinal && (
+              {hasLandscape && (
                 <Badge className="bg-green-100 text-green-700 text-xs">
-                  Published
+                  Available
                 </Badge>
               )}
             </div>
 
-            {hasFinal ? (
+            {hasLandscape ? (
               <>
                 <div className="text-xs text-gray-600">
-                  <p className="mb-1">Production-ready version. Approved for distribution and social media posting.</p>
+                  <p className="mb-1">Widescreen format for YouTube, LinkedIn, and website embedding.</p>
                 </div>
-
                 <div className="space-y-2">
-                  {isGoogleDriveUrl(video.final_video_url!) ? (
+                  {isGoogleDriveUrl(video.landscape_video_url!) ? (
                     <GoogleDriveButton
-                      fileIdOrUrl={video.final_video_url}
+                      fileIdOrUrl={video.landscape_video_url}
                       variant="default"
                       size="sm"
                       className="w-full"
@@ -293,20 +287,19 @@ export function RawVideoSidebar({ video, activeStage, onStageChange }: RawVideoS
                       size="sm"
                       variant="default"
                       className="w-full"
-                      onClick={() => window.open(video.final_video_url, '_blank')}
+                      onClick={() => window.open(video.landscape_video_url, '_blank')}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      View Final Video
+                      View Landscape Video
                     </Button>
                   )}
                 </div>
-
                 <div className="pt-3 border-t space-y-2">
-                  <p className="text-xs font-medium text-gray-700">Typical uses:</p>
+                  <p className="text-xs font-medium text-gray-700">Platforms:</p>
                   <ul className="text-xs text-gray-600 space-y-1 ml-3">
-                    <li>• Social media posting</li>
-                    <li>• Website embedding</li>
-                    <li>• Public distribution</li>
+                    <li>• YouTube</li>
+                    <li>• LinkedIn</li>
+                    <li>• Website</li>
                   </ul>
                 </div>
               </>

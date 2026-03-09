@@ -1,0 +1,156 @@
+{
+  "description": "M3 Customer Logo Scaling Reference - Used in Social Proof Video Slide",
+  "lastUpdated": "2026-03-09",
+  "logos": [
+    {
+      "id": 1,
+      "name": "GEMS Modern Academy",
+      "filename": "gems-logo.png",
+      "type": "horizontal",
+      "scaling": {
+        "landscape_16x9": 2.5,
+        "portrait_9x16": 2.5
+      },
+      "position": {
+        "landscape": 1,
+        "portrait": { "row": 1, "col": 1 }
+      },
+      "notes": "Horizontal logo with significant whitespace - requires high scaling"
+    },
+    {
+      "id": 2,
+      "name": "The Millennium School",
+      "filename": "millennium-logo.png",
+      "type": "horizontal",
+      "scaling": {
+        "landscape_16x9": 2.5,
+        "portrait_9x16": 2.5
+      },
+      "position": {
+        "landscape": 2,
+        "portrait": { "row": 1, "col": 2 }
+      },
+      "notes": "Horizontal logo with whitespace"
+    },
+    {
+      "id": 3,
+      "name": "PICT Model School",
+      "filename": "pict-logo.png",
+      "type": "square",
+      "scaling": {
+        "landscape_16x9": 1.0,
+        "portrait_9x16": 1.0
+      },
+      "position": {
+        "landscape": 3,
+        "portrait": { "row": 3, "col": 1 }
+      },
+      "notes": "Square badge logo - no scaling needed"
+    },
+    {
+      "id": 4,
+      "name": "PSBB Senior Secondary School",
+      "filename": "psbb-logo.png",
+      "type": "square",
+      "scaling": {
+        "landscape_16x9": 1.0,
+        "portrait_9x16": 1.0
+      },
+      "position": {
+        "landscape": 4,
+        "portrait": { "row": 3, "col": 2 }
+      },
+      "notes": "Square badge logo - no scaling needed"
+    },
+    {
+      "id": 5,
+      "name": "Sanskriti The Gurukul",
+      "filename": "sanskriti-logo.png",
+      "type": "square",
+      "scaling": {
+        "landscape_16x9": 1.0,
+        "portrait_9x16": 1.0
+      },
+      "position": {
+        "landscape": 5,
+        "portrait": { "row": 3, "col": 3 }
+      },
+      "notes": "Square badge logo - no scaling needed"
+    },
+    {
+      "id": 6,
+      "name": "Shiv Nadar School",
+      "filename": "shiv-nadar-logo.png",
+      "type": "mixed",
+      "scaling": {
+        "landscape_16x9": 1.8,
+        "portrait_9x16": 1.7
+      },
+      "position": {
+        "landscape": 6,
+        "portrait": { "row": 4, "col": 1 }
+      },
+      "notes": "Mixed aspect ratio - different scaling per orientation"
+    },
+    {
+      "id": 7,
+      "name": "GEAR Innovative International School",
+      "filename": "gear-logo.png",
+      "type": "horizontal",
+      "scaling": {
+        "landscape_16x9": 2.0,
+        "portrait_9x16": 2.0
+      },
+      "position": {
+        "landscape": 7,
+        "portrait": { "row": 2, "col": 1 }
+      },
+      "notes": "Horizontal logo with whitespace"
+    },
+    {
+      "id": 8,
+      "name": "Sri Kumaran Children's Home",
+      "filename": "sri-kumaran-logo.png",
+      "type": "horizontal",
+      "scaling": {
+        "landscape_16x9": 2.5,
+        "portrait_9x16": 2.5
+      },
+      "position": {
+        "landscape": 8,
+        "portrait": { "row": 2, "col": 2 }
+      },
+      "notes": "Horizontal logo with whitespace"
+    },
+    {
+      "id": 9,
+      "name": "TVS Academy",
+      "filename": "tvs-logo.png",
+      "type": "square",
+      "scaling": {
+        "landscape_16x9": 1.0,
+        "portrait_9x16": 1.0
+      },
+      "position": {
+        "landscape": 9,
+        "portrait": { "row": 4, "col": 2 }
+      },
+      "notes": "Square badge logo - no scaling needed"
+    }
+  ],
+  "exportSettings": {
+    "format": "PNG",
+    "transparency": true,
+    "resolution": "2x",
+    "colorSpace": "sRGB",
+    "containerSize": {
+      "landscape": { "width": 320, "height": 96 },
+      "portrait": { "width": 280, "height": 96 }
+    }
+  },
+  "technicalReference": {
+    "sourceFile": "/src/app/components/CroppedSchoolLogos.tsx",
+    "usageFile": "/src/app/components/VideoSlideTemplates.tsx",
+    "implementationNote": "CSS transform: scale() applied at render time with object-fit: contain"
+  }
+}

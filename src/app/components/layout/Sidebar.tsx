@@ -8,7 +8,8 @@ import {
   Calendar,
   Lightbulb,
   Database,
-  Settings
+  Settings,
+  Layers
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -23,6 +24,7 @@ const navigation = [
   { name: 'Clips', href: '/clips', icon: Scissors },
   { name: 'Posts', href: '/posts', icon: Calendar },
   { name: 'Ideas', href: '/ideas', icon: Lightbulb },
+  { name: 'Collateral', href: '/collateral', icon: Layers },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 

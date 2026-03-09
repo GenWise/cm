@@ -18,8 +18,8 @@ export interface Video {
   subject_org?: string;
   raw_video_url?: string;
   raw_video_drive_id?: string;
-  edited_video_url?: string;
-  final_video_url?: string;
+  portrait_video_url?: string;
+  landscape_video_url?: string;
   thumbnail_url?: string;
   transcript_text?: string;
   captions_srt_url?: string;

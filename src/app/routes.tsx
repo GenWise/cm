@@ -9,6 +9,7 @@ import { Posts } from './pages/Posts';
 import { Ideas } from './pages/Ideas';
 import { RawSources } from './pages/RawSources';
 import { Settings } from './pages/Settings';
+import { Collateral } from './pages/Collateral';
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       { path: 'ideas', element: <Ideas /> },
       { path: 'ideas/new', element: <Ideas /> },
       { path: 'sources', element: <RawSources /> },
+      { path: 'collateral', element: <Collateral /> },
       { path: 'settings', element: <Settings /> },
     ],
   },
