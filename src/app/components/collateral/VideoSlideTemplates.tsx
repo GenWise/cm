@@ -706,7 +706,7 @@ const TestimonialProfileSlide: React.FC<{ data: TestimonialProfileSlideData; isP
         <img
           src={data.thumbnailImage}
           alt={data.teacherName}
-          className={`absolute inset-0 w-full h-full object-cover ${!isPortrait ? 'object-top' : ''}`}
+          className={`absolute inset-0 w-full h-full object-cover object-center`}
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-gray-400 to-gray-600" />
