@@ -1039,7 +1039,13 @@ export const SlideTemplateBrowser: React.FC<SlideTemplateBrowserProps> = ({
         teacherRole: editableProfile.teacherRole || 'Mathematics Teacher',
         schoolName: editableProfile.schoolName || "St. Mary's High School",
         thumbnailImage: editableProfile.thumbnailImage || 'https://via.placeholder.com/1920x1080/FF8C00/FFFFFF?text=Dr.+Jane+Doe',
-        title: "A Teacher's Perspective on\nMy Misconception Mentor (M3)"
+        title: (() => {
+          const role = (editableProfile.teacherRole || '').toLowerCase();
+          const perspective = role.includes('principal') ? "Principal's"
+            : role.includes('coordinator') ? "Coordinator's"
+            : "Teacher's";
+          return `A ${perspective} Perspective on\nMy Misconception Mentor (M3)`;
+        })()
       }
     }
   ];
