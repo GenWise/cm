@@ -5,8 +5,6 @@ import {
   LayoutDashboard,
   Video,
   Scissors,
-  Calendar,
-  Lightbulb,
   Database,
   Settings,
   Layers
@@ -22,8 +20,6 @@ const navigation = [
   { name: 'Sources', href: '/sources', icon: Database },
   { name: 'Videos', href: '/videos', icon: Video },
   { name: 'Clips', href: '/clips', icon: Scissors },
-  { name: 'Posts', href: '/posts', icon: Calendar },
-  { name: 'Ideas', href: '/ideas', icon: Lightbulb },
   { name: 'Collateral', href: '/collateral', icon: Layers },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];

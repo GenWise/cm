@@ -54,39 +54,6 @@ export interface Clip {
   created_at?: string;
 }
 
-export interface ContentPost {
-  id: string;
-  video_id?: string;
-  clip_id?: string;
-  custom_asset_url?: string;
-  platform: 'youtube' | 'linkedin' | 'whatsapp' | 'instagram' | 'twitter';
-  post_type?: string;
-  title?: string;
-  caption?: string;
-  hashtags?: string; // JSON array as string
-  mentions?: string; // JSON array of @handles to tag, e.g. ["@GenWise_", "@M3Program"]
-  status?: 'idea' | 'draft' | 'ready' | 'scheduled' | 'posted' | 'failed';
-  assigned_to?: string;
-  priority?: 'low' | 'normal' | 'high' | 'urgent';
-  idea_date?: string;
-  target_date?: string;
-  scheduled_date?: string;
-  posted_at?: string;
-  platform_url?: string;
-  platform_id?: string;
-  // Thread support (for putting URLs in replies to avoid Twitter penalties)
-  parent_post_id?: string; // If set, this is a reply/continuation
-  thread_position?: number; // 0=original, 1+=replies
-  views?: number;
-  likes?: number;
-  shares?: number;
-  comments?: number;
-  saves?: number;
-  notes?: string;
-  created_at?: string;
-  updated_at?: string;
-}
-
 export interface Campaign {
   id: string;
   name: string;
@@ -101,16 +68,10 @@ export interface Campaign {
 export interface VideoWithProgram extends Video {
   program?: Program;
   clips?: Clip[];
-  posts?: ContentPost[];
 }
 
 export interface ClipWithVideo extends Clip {
   video?: Video;
-}
-
-export interface PostWithRelations extends ContentPost {
-  video?: Video;
-  clip?: Clip;
 }
 
 // Raw Sources - tracking content origins

@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { Program, Video, Clip, ContentPost, VideoWithTags, RawSource, RawSourceType, RawSourceStatus } from './types';
+import type { Program, Video, Clip, VideoWithTags, RawSource, RawSourceType, RawSourceStatus } from './types';
 import { aggregateVideoTags } from './tagUtils';
 
 // Programs
@@ -78,11 +78,11 @@ export const videosApi = {
   getById: async (id: string) => {
     const { data, error } = await supabase
       .from('videos')
-      .select('*, program:programs(*), clips(*), posts:content_posts(*)')
+      .select('*, program:programs(*), clips(*)')
       .eq('id', id)
       .single();
     if (error) throw error;
-    
+
     // Aggregate tags from clips
     return aggregateVideoTags(data, data.clips);
   },
@@ -217,93 +217,17 @@ export const clipsApi = {
   },
 };
 
-// Content Posts
-export const postsApi = {
-  getAll: async (filters?: { status?: string; platform?: string }) => {
-    let query = supabase
-      .from('content_posts')
-      .select('*, video:videos(id, title), clip:clips(id, description)')
-      .order('created_at', { ascending: false });
-
-    if (filters?.status) {
-      query = query.eq('status', filters.status);
-    }
-    if (filters?.platform) {
-      query = query.eq('platform', filters.platform);
-    }
-
-    const { data, error } = await query;
-    if (error) throw error;
-    return data;
-  },
-
-  getById: async (id: string) => {
-    const { data, error } = await supabase
-      .from('content_posts')
-      .select('*, video:videos(*), clip:clips(*)')
-      .eq('id', id)
-      .single();
-    if (error) throw error;
-    return data;
-  },
-
-  create: async (post: Omit<ContentPost, 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('content_posts')
-      .insert(post)
-      .select()
-      .single();
-    if (error) throw error;
-    return data as ContentPost;
-  },
-
-  update: async (id: string, updates: Partial<ContentPost>) => {
-    const { data, error } = await supabase
-      .from('content_posts')
-      .update({ ...updates, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    if (error) throw error;
-    return data as ContentPost;
-  },
-
-  delete: async (id: string) => {
-    const { error } = await supabase
-      .from('content_posts')
-      .delete()
-      .eq('id', id);
-    if (error) throw error;
-  },
-
-  getUpcoming: async (limit: number = 5) => {
-    const { data, error } = await supabase
-      .from('content_posts')
-      .select('*, video:videos(id, title), clip:clips(id, description)')
-      .in('status', ['ready', 'scheduled'])
-      .not('target_date', 'is', null)
-      .order('target_date')
-      .limit(limit);
-    if (error) throw error;
-    return data;
-  },
-};
-
 // Stats
 export const statsApi = {
   getCounts: async () => {
-    const [videos, clips, posts, ideas] = await Promise.all([
+    const [videos, clips] = await Promise.all([
       supabase.from('videos').select('id', { count: 'exact', head: true }),
       supabase.from('clips').select('id', { count: 'exact', head: true }),
-      supabase.from('content_posts').select('id', { count: 'exact', head: true }).eq('status', 'posted'),
-      supabase.from('content_posts').select('id', { count: 'exact', head: true }).eq('status', 'idea'),
     ]);
 
     return {
       videos: videos.count || 0,
       clips: clips.count || 0,
-      posts: posts.count || 0,
-      ideas: ideas.count || 0,
     };
   },
 };
